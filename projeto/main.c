@@ -5,6 +5,7 @@
 #include <avr/interrupt.h>
 #include <string.h>
 #include <stdio.h>
+#include <LiquidCrystal.h>
 
 // CONFIGURACAO DO LCD
 #define LCD_PORT PORTD //porta que ta conectado
