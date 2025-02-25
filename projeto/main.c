@@ -10,8 +10,8 @@
 // CONFIGURACAO DO LCD
 #define LCD_PORT PORTD //porta que ta conectado
 #define LCD_DDR DDRD // configura como saida
-#define LCD_RS PD0 // esse e o de baixo configuram os pinos de controle do LCD
-#define LCD_EN PD1
+#define LCD_RS PD0 //configura os pinos de controle do LCD
+#define LCD_EN PD1 //configura os pinos de controle do LCD
 
 // CONFIGURACAO DO TECLADO - Define a porta e os registradores do teclado matricial
 #define TECLADO_PORT PORTC
