@@ -5,6 +5,7 @@ Implemente um sistema de um “cofre” com senha numérica de 6 dígitos utiliz
 4x4 e o display 16x2 como saída de dados para o usuário. Atenção aos requisitos abaixo:
 
 1. Utilizar as teclas do teclado 4x4 para inserção da senha numérica (2 pontos)
+
 2. Apresentar mensagens ao usuário no display 16x2 com a situação do cofre,
 destacando as ações abaixo (2 pontos):
 a. “Inserir Senha”
