@@ -1,3 +1,42 @@
+/*A avaliação será feita através de um projeto que utiliza os módulos descritos para atender
+aos requisitos abaixo. Cada requisito atingido soma um ponto na avaliação, sendo que não
+é preciso atingir todos para obter a nota máxima.
+Implemente um sistema de um “cofre” com senha numérica de 6 dígitos utilizando o teclado
+4x4 e o display 16x2 como saída de dados para o usuário. Atenção aos requisitos abaixo:
+
+1. Utilizar as teclas do teclado 4x4 para inserção da senha numérica (2 pontos)
+2. Apresentar mensagens ao usuário no display 16x2 com a situação do cofre,
+destacando as ações abaixo (2 pontos):
+a. “Inserir Senha”
+b. “Senha Incorreta”
+c. “Senha Correta”
+d. “Cofre Travado”
+e. “Cofre Aberto”
+
+3. Mostrar a senha no display 16x2 enquanto ela é digitada (1 ponto)
+4. Acionar o buzzer de acordo com as situações abaixo (2 pontos):
+a. Tecla pressionada, 1 bip curto
+b. Senha incorreta, 1 bip longo
+c. Senha correta, 3 bips curtos
+
+5. Implementar um sistema de travamento do teclado após 3 tentativas com senhas
+inválidas. Adicionar as seguintes mensagens no funcionamento do display (2
+ponto):
+a. “Tentativas Restantes: X”
+b. “Teclado Bloqueado por X segundos”
+
+6. Implementar um mecanismo de alteração da senha utilizando a memória EEPROM
+(2 pontos)
+
+7. Apresentar a hora atual no display LCD, considerando início à meia noite.Utilizar um
+sistema simples de ajuste do relógio, por exemplo um tecla incrementa a hora e
+outra tecla incrementa o minuto. Outros mecanismos de ajuste de horário podem ser
+aplicados (2 pontos)
+
+8. Enviar o código através de um repositório pessoal no GitHub utilizando qualquer
+cliente do GIT. Enviar o código do projeto através de “commits” atômicos, com um
+mínimo de 10 commits. (2 pontos)*/
+
 
 // INCLUSAO DE BIBLIOTECAS
 #include <avr/io.h>
@@ -10,8 +49,8 @@
 // CONFIGURACAO DO LCD
 #define LCD_PORT PORTD //porta que ta conectado
 #define LCD_DDR DDRD // configura como saida
-#define LCD_RS PD0 //configura os pinos de controle do LCD
-#define LCD_EN PD1 //configura os pinos de controle do LCD
+#define LCD_RS PD0 // esse e o de baixo configuram os pinos de controle do LCD
+#define LCD_EN PD1
 
 // CONFIGURACAO DO TECLADO - Define a porta e os registradores do teclado matricial
 #define TECLADO_PORT PORTC
@@ -30,7 +69,9 @@
 #define BUTTON_DDR DDRB
 #define BUTTON_PIN PINB
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 
 // DEFINICAO DE SENHA E VARIAVEIS DE COFRE
 char senha_correta[] = "123456"; //senha fixa
@@ -49,6 +90,7 @@ void buzzer_beep(uint8_t times);
 void handle_password_entry();
 void mensagem_trancar();
 void rtc_read_time();
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -139,7 +181,7 @@ void handle_password_entry() {
 	input_index = 0;
 	memset(inserir_senha, 0, sizeof(inserir_senha));
 	
-	while (input_index < 6) { //Continua ate que 6 digitos sejam digitados
+	while (input_index < 6) { //Continua ate que 6 digitos sejam inseridos
 		char key = teclado_getkey();
 		
 		if (key >= '0' && key <= '9') { //verifica se a tecla pressionada e um numero (0 a 9). Se nao for um numero, o caractere e ignorado
@@ -207,21 +249,21 @@ void rtc_read_time() {
 	if (min == 60) { min = 0; hour++; }
 	if (hour == 24) { hour = 0; }
 
-	// Verifica se o botao de hora foi pressionado
-	if (!(BUTTON_PIN & (1 << BUTTON_HOUR_PIN))) {  // Verifica se o botao de hora foi pressionado
+	//Verifica se o botao de hora foi pressionado
+	if (!(BUTTON_PIN & (1 << BUTTON_HOUR_PIN))) {  //Verifica se o botao de hora foi pressionado
 		hour++;
-		if (hour == 24) hour = 0;  // Garante que nao ultrapasse 23h
+		if (hour == 24) hour = 0;  //Garante que nao ultrapasse 23h
 		_delay_ms(200);  //Debounce
 	}
 
-	// Verifica se o botao de minuto foi pressionado
-	if (!(BUTTON_PIN & (1 << BUTTON_MIN_PIN))) {  // Verifica se o botao de segundo foi pressionado
+	//Verifica se o botao de minuto foi pressionado
+	if (!(BUTTON_PIN & (1 << BUTTON_MIN_PIN))) {  //Verifica se o botao de segundo foi pressionado
 		min++;
-		if (min == 60) min = 0;  // Garante que nao ultrapasse 59 min
+		if (min == 60) min = 0;  //Garante que nao ultrapasse 59 min
 		_delay_ms(200);  //Debounce
 	}
 
-	// Exibe a hora formatada no LCD
+	//Exibe a hora formatada no LCD
 	char time_str[9];
 	snprintf(time_str, 9, "%02d:%02d:%02d", hour, min, sec);
 	lcd_gotoxy(6, 0); //Move o cursor para a primeira linha, posicao 6 (logo apos "Time: ")
