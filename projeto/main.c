@@ -15,6 +15,7 @@ d. “Cofre Travado”
 e. “Cofre Aberto”
 
 3. Mostrar a senha no display 16x2 enquanto ela é digitada (1 ponto)
+
 4. Acionar o buzzer de acordo com as situações abaixo (2 pontos):
 a. Tecla pressionada, 1 bip curto
 b. Senha incorreta, 1 bip longo
