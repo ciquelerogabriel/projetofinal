@@ -1,11 +1,11 @@
 
 // INCLUSAO DE BIBLIOTECAS
 #include <avr/io.h>
+#define F_CPU 16000000
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <string.h>
 #include <stdio.h>
-#include <LiquidCrystal.h>
 
 // CONFIGURACAO DO LCD
 #define LCD_PORT PORTD //porta que ta conectado
@@ -186,6 +186,7 @@ void mensagem_trancar() {
 	}
 	tentativas = 3;
 	lcd_clear();
+}
 
 // SIMULAÇÃO DE RELÓGIO DIGITAL
 void rtc_read_time() {
@@ -243,8 +244,10 @@ int main(void) {
 	while (1) {
 		rtc_read_time(); //Chama rtc_read_time() para exibir o relogio digital no LCD
 		char key = teclado_getkey(); //Verifica se alguma tecla foi pressionada no teclado matricial
+		
 		if (key) { //Se key nao for 0, significa que uma tecla foi pressionada
 			handle_password_entry(); //Chama handle_password_entry(); para capturar a senha e verificar se esta correta
 		}
 	}
+	return 0;
 }
