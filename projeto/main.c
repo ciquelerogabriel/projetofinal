@@ -126,7 +126,7 @@ void lcd_clear() {
 	_delay_ms(2);
 }
 
-// FUNCA�O PARA ESCREVER NO LCD
+// FUNCAO PARA ESCREVER NO LCD
 void lcd_print(const char *str) {
 	while (*str) {
         LCD_PORT = *str++; // Envia caractere por caractere
@@ -225,9 +225,10 @@ void mensagem_trancar() {
 	
 	for (int i = 10; i > 0; i--) { // Inicia um loop de 10 a 1, indicando quantos segundos faltam para desbloquear.
 		lcd_gotoxy(0, 1);
-		
+		lcd_print("                "); // Limpa a linha antes de escrever
+		lcd_gotoxy(0, 1);
 		char buffer[16]; //Cria uma string com a contagem regressiva
-		snprintf(buffer, 16, "Unlock in: %d s", i);
+		snprintf(buffer, 16, "Desbloqueia em: %d s", i);
 		lcd_print(buffer);
 		_delay_ms(1000);
 	}
