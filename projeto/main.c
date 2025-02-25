@@ -184,7 +184,7 @@ void mensagem_trancar() {
 		lcd_print(buffer);
 		_delay_ms(1000);
 	}
-	attempts = 3;
+	tentativas = 3;
 	lcd_clear();
 
 // SIMULAÇÃO DE RELÓGIO DIGITAL
