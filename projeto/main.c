@@ -1,28 +1,28 @@
 
-// INCLUS�O DE BIBLIOTECAS
+// INCLUSAO DE BIBLIOTECAS
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <string.h>
 #include <stdio.h>
 
-// CONFIGURA��O DO LCD
+// CONFIGURACAO DO LCD
 #define LCD_PORT PORTD //porta que ta conectado
 #define LCD_DDR DDRD // configura como saida
 #define LCD_RS PD0 // esse e o de baixo configuram os pinos de controle do LCD
 #define LCD_EN PD1
 
-// CONFIGURA��O DO TECLADO - Define a porta e os registradores do teclado matricial
+// CONFIGURACAO DO TECLADO - Define a porta e os registradores do teclado matricial
 #define TECLADO_PORT PORTC
 #define TECLADO_DDR DDRC
 #define TECLADO_PIN PINC
 
-// CONFIGURA��O DO BUZZER - Configura a porta onde o buzzer est� conectado
+// CONFIGURACAO DO BUZZER - Configura a porta onde o buzzer est� conectado
 #define BUZZER_PORT PORTB
 #define BUZZER_DDR DDRB
 #define BUZZER_PIN PB0
 
-// CONFIGURA��O REL�GIO
+// CONFIGURACAO RELOGIO
 #define BUTTON_HOUR_PIN PB1  // Bot�o para incrementar a hora
 #define BUTTON_MIN_PIN  PB2  // Bot�o para incrementar o minuto
 #define BUTTON_PORT PORTB
@@ -31,7 +31,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-// DEFINI��O DE SENHA E VARI�VEIS DE COFRE
+// DEFINICAO DE SENHA E VARIAVEIS DE COFRE
 char senha_correta[] = "123456"; //senha fixa
 char inserir_senha[7]; //armazena a senha
 uint8_t input_index = 0; //controla a posi��o da senha digitada
